@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default colors -->
+    <color name="dark_background">#292929</color>
+
+    <!-- Blue Theme Colors -->
+    <color name="bluePrimary">#2196F3</color>
+    <color name="blueDark">#0D47A1</color>
+    <color name="blueAccent">#4DB6AC</color>
+
+    <!-- Red Theme Colors -->
+    <color name="redPrimary">#E44242</color>
+    <color name="redDark">#B82020</color>
+    <color name="redAccent">#FF5F5F</color>
+
+</resources>

@@ -4,5 +4,22 @@
     <string name="app_name">Simpl</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_new">Add Task</string>
+
+    <!-- Create Task View -->
+    <string name="create_title">Create Task</string>
+    <string name="create_name">TASK:</string>
+    <string name="create_note">EXTRA NOTE:</string>
+    <string name="create_location">LOCATION ACTIVATED</string>
+    <string name="create_time">TIME ACTIVATED</string>
+    <string name="create_location_mod">Choose Location</string>
+    <string name="create_time_mod">Choose time</string>
+    <string name="create_repeat">REPEAT:</string>
+    <string name="create_repeat_daily">DAILY</string>
+    <string name="create_repeat_weekly">WEEKLY</string>
+    <string name="create_due_date">DUE DATE:</string>
+    <string name="create_create">Create</string>
+    <string name="create_cancel">Cancel</string>
+    <string name="create_clear">Clear</string>
 
 </resources>

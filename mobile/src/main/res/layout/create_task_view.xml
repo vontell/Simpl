@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/create_name"
+        android:id="@+id/taskNameLabel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="2dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/taskNameEdit"
+        android:textSize="18sp"
+        android:elegantTextHeight="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:capitalize="words" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/create_note"
+        android:id="@+id/noteLabel"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/taskNameEdit"
+        android:layout_alignLeft="@+id/taskNameLabel"
+        android:layout_alignStart="@+id/taskNameLabel"
+        android:layout_marginTop="4dp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/noteEdit"
+        android:layout_below="@+id/taskNameEdit"
+        android:layout_alignRight="@+id/taskNameEdit"
+        android:layout_alignEnd="@+id/taskNameEdit"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:capitalize="sentences" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_location"
+        android:id="@+id/locationCheck"
+        android:layout_below="@+id/noteEdit"
+        android:layout_alignLeft="@+id/noteLabel"
+        android:layout_alignStart="@+id/noteLabel"
+        android:checked="false"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_time"
+        android:id="@+id/timeCheck"
+        android:layout_below="@+id/locationCheck"
+        android:layout_alignLeft="@+id/locationCheck"
+        android:layout_alignStart="@+id/locationCheck"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignTop="@+id/repeatCheck"
+        android:layout_toRightOf="@+id/repeatCheck"
+        android:layout_toEndOf="@+id/repeatCheck">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_repeat_daily"
+            android:id="@+id/dailyButton"
+            android:textStyle="bold|italic"
+            android:layout_marginRight="4dp"
+            android:enabled="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_repeat_weekly"
+            android:id="@+id/weeklyButton"
+            android:textStyle="bold|italic"
+            android:layout_marginRight="4dp"
+            android:enabled="false" />
+
+    </RadioGroup>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_repeat"
+        android:id="@+id/repeatCheck"
+        android:textStyle="bold"
+        android:layout_below="@+id/dueCheck"
+        android:layout_alignLeft="@+id/dueCheck"
+        android:layout_alignStart="@+id/dueCheck" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_due_date"
+        android:id="@+id/dueCheck"
+        android:layout_below="@+id/timeCheck"
+        android:layout_alignLeft="@+id/timeCheck"
+        android:layout_alignStart="@+id/timeCheck"
+        android:textStyle="bold" />
+
+</RelativeLayout>
