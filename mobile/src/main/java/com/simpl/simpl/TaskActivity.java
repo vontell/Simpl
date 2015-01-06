@@ -3,9 +3,6 @@ package com.simpl.simpl;
 import android.app.Notification;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,16 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.melnykov.fab.FloatingActionButton;
@@ -36,7 +28,6 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.zip.Inflater;
 
 import resources.Task;
 
@@ -277,12 +268,22 @@ public class TaskActivity extends ActionBarActivity
             registerTimeNotification(newTask);
         }
 
+
+
         tasks.add(newTask);
 
         dueDate = null;
         activeDate = null;
 
         //TODO: Register time and location notifications here
+
+    }
+
+    public void showDetail(){
+
+        LayoutInflater linf = LayoutInflater.from(this);
+        final View root = linf.inflate(R.layout.task_detail, null);
+        taskLayout.addView(root, 2);
 
     }
 
@@ -294,6 +295,10 @@ public class TaskActivity extends ActionBarActivity
 
         if(nameEdit.getText().toString().trim().equals("")){
             nameEdit.setError("Need to enter a name");
+            return false;
+        }
+        else if(locationCheck.isChecked() && locationEdit.getText().toString().trim().equals("")){
+            locationEdit.setError("Need to enter an activating location");
             return false;
         }
         else {
@@ -312,6 +317,7 @@ public class TaskActivity extends ActionBarActivity
         switch(id){
 
             case R.id.action_settings:
+                showDetail();
                 break;
 
         }
@@ -374,18 +380,14 @@ public class TaskActivity extends ActionBarActivity
      */
     public void registerTimeNotification(Task t){
 
-        Notification.Builder nBuilder = new Notification.Builder(this);
-        nBuilder
-                .setWhen(t.getActingTime().getTime())
-                .setContentTitle(t.getTaskName());
-        nBuilder.build();
+
 
     }
 
     /**
      * Will register a location-based notification
      */
-    public void registerLocationNotification(){
+    public void registerLocationNotification(Task t){
 
     }
 
