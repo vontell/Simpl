@@ -10,6 +10,7 @@
     <string name="create_title">Create Task</string>
     <string name="create_name">TASK:</string>
     <string name="create_note">EXTRA NOTE:</string>
+    <string name="create_task_location">LOCATION:</string>
     <string name="create_location">LOCATION ACTIVATED</string>
     <string name="create_time">TIME ACTIVATED</string>
     <string name="create_location_mod">Choose Location</string>

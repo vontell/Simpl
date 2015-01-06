@@ -20,7 +20,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords|textPersonName|textAutoCorrect"
         android:ems="10"
         android:id="@+id/taskNameEdit"
         android:textSize="18sp"
@@ -54,14 +54,15 @@
         android:layout_alignEnd="@+id/taskNameEdit"
         android:singleLine="true"
         android:ellipsize="end"
-        android:capitalize="sentences" />
+        android:capitalize="sentences"
+        android:inputType="textCapSentences|textAutoCorrect" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/create_location"
         android:id="@+id/locationCheck"
-        android:layout_below="@+id/noteEdit"
+        android:layout_below="@+id/taskLocationEdit"
         android:layout_alignLeft="@+id/noteLabel"
         android:layout_alignStart="@+id/noteLabel"
         android:checked="false"
@@ -124,6 +125,30 @@
         android:layout_below="@+id/timeCheck"
         android:layout_alignLeft="@+id/timeCheck"
         android:layout_alignStart="@+id/timeCheck"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapWords|textPostalAddress|textAutoCorrect"
+        android:ems="10"
+        android:id="@+id/taskLocationEdit"
+        android:layout_below="@+id/noteEdit"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:singleLine="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/create_task_location"
+        android:id="@+id/textView"
+        android:layout_below="@+id/noteEdit"
+        android:layout_alignLeft="@+id/noteLabel"
+        android:layout_alignStart="@+id/noteLabel"
+        android:layout_marginTop="4dp"
+        android:textColor="@android:color/black"
         android:textStyle="bold" />
 
 </RelativeLayout>
