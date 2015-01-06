@@ -1,9 +1,11 @@
 package com.simpl.simpl;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -32,6 +35,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.zip.Inflater;
 
 import resources.Task;
@@ -55,6 +59,9 @@ public class TaskActivity extends ActionBarActivity
     private TimePickerDialog timePickDue;
     private DatePickerDialog datePickActive;
     private DatePickerDialog datePickDue;
+    private Date dueDate = null;
+    private Date activeDate = null;
+    private boolean changingActive = false;
     private RadioButton dailyButton;
     private RadioButton weeklyButton;
 
@@ -201,6 +208,7 @@ public class TaskActivity extends ActionBarActivity
                             now.get(Calendar.MONTH),
                             now.get(Calendar.DAY_OF_MONTH)
                     );
+                    changingActive = true;
                     datePickActive.show(getFragmentManager(), "Datepickerdialog");
                 }
             }
@@ -218,6 +226,7 @@ public class TaskActivity extends ActionBarActivity
                             now.get(Calendar.MONTH),
                             now.get(Calendar.DAY_OF_MONTH)
                     );
+                    changingActive = false;
                     datePickDue.show(getFragmentManager(), "Datepickerdialog");
                 }
             }
@@ -230,18 +239,27 @@ public class TaskActivity extends ActionBarActivity
      */
     public void updateListView(){
 
-        taskLayout.removeAllViews();
+        Task t = tasks.get(tasks.size() - 1);
 
-        for(Task t : tasks){
+        LayoutInflater linf = LayoutInflater.from(this);
+        final View root = linf.inflate(R.layout.insertable_task, null);
 
-            LayoutInflater linf = LayoutInflater.from(this);
-            final View root = linf.inflate(R.layout.insertable_task, null);
+        TextView text = (TextView) root.findViewById(R.id.textName);
+        TextView dateText = (TextView) root.findViewById(R.id.due_text);
+        CheckBox doneCheck = (CheckBox) root.findViewById(R.id.doneCheck);
+        ImageView locationImage = (ImageView) root.findViewById(R.id.locationImage);
+        ImageView timeImage = (ImageView) root.findViewById(R.id.timeImage);
+        ImageView subImage = (ImageView) root.findViewById(R.id.subtaskImage);
 
-            TextView text = (TextView) root.findViewById(R.id.textName);
-            text.setText(t.getTaskName());
+        text.setText(t.getTaskName());
+        if(t.getDueDate() != null){ dateText.setText("" + t.getDueDate().getMonth() + "/" + t.getDueDate().getDay() + "/" + t.getDueDate().getYear()); }
+        else {dateText.setText("");}
 
-            taskLayout.addView(root, 0);
-        }
+        if(t.getSubTasks().size() == 0){} else {subImage.setVisibility(View.VISIBLE);}
+        if(t.getActingLocation() == null){} else {locationImage.setVisibility(View.VISIBLE);}
+        if(t.getActingTime() == null){} else {timeImage.setVisibility(View.VISIBLE);}
+
+        taskLayout.addView(root, 0);
 
     }
 
@@ -253,10 +271,18 @@ public class TaskActivity extends ActionBarActivity
         String note = (noteEdit.getText().toString().trim().equals("") ? null : noteEdit.getText().toString().trim());
         String loca = (locationEdit.getText().toString().trim().equals("") ? null : locationEdit.getText().toString().trim());
 
+        Task newTask = new Task(name, note, loca, null, activeDate, false, false, dueDate, false);
 
-        Task newTask = new Task(name, note, loca, null, null, false, false, null, false);
+        if(activeDate != null){
+            registerTimeNotification(newTask);
+        }
 
         tasks.add(newTask);
+
+        dueDate = null;
+        activeDate = null;
+
+        //TODO: Register time and location notifications here
 
     }
 
@@ -294,9 +320,11 @@ public class TaskActivity extends ActionBarActivity
     }
 
     @Override
-    public void onDateSet(DatePickerDialog datePickerDialog, int i, int i2, int i3) {
+    public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
 
         if(datePickerDialog == datePickActive){
+            //TODO: Find alternative to deprecated date
+            activeDate = new Date(year, month, day);
             Calendar now = Calendar.getInstance();
             timePickActive = TimePickerDialog.newInstance(
                     TaskActivity.this,
@@ -308,6 +336,7 @@ public class TaskActivity extends ActionBarActivity
             timePickActive.show(getFragmentManager(), "Timepickerdialog");
         }
         else{
+            dueDate = new Date(year, month, day);
             Calendar now = Calendar.getInstance();
             timePickDue = TimePickerDialog.newInstance(
                     TaskActivity.this,
@@ -321,13 +350,42 @@ public class TaskActivity extends ActionBarActivity
     }
 
     @Override
-    public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i2) {
+    public void onTimeSet(RadialPickerLayout radialPickerLayout, int hour24, int minute) {
 
+        if(changingActive){
+            activeDate.setHours(hour24);
+            activeDate.setMinutes(minute);
+        }
+        else {
+            dueDate.setHours(hour24);
+            dueDate.setMinutes(minute);
+        }
 
+        changingActive = false;
 
     }
 
     public void loadColors(){
+
+    }
+
+    /**
+     * Will register a time-based notification
+     */
+    public void registerTimeNotification(Task t){
+
+        Notification.Builder nBuilder = new Notification.Builder(this);
+        nBuilder
+                .setWhen(t.getActingTime().getTime())
+                .setContentTitle(t.getTaskName());
+        nBuilder.build();
+
+    }
+
+    /**
+     * Will register a location-based notification
+     */
+    public void registerLocationNotification(){
 
     }
 

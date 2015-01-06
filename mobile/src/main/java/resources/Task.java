@@ -51,7 +51,6 @@ public class Task {
         subTasks.add(t);
     }
 
-
     public String getTaskNote() {
         return taskNote;
     }

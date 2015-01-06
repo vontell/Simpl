@@ -12,13 +12,16 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:id="@+id/checkBox"
+            android:id="@+id/doneCheck"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textColor="@color/white"
             android:buttonTint="@color/white"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:checked="false"
+            android:textColorHighlight="@color/white"
+            android:textColorLink="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +40,14 @@
             android:singleLine="true"
             android:visibility="visible"
             android:gravity="center_vertical"
-            android:layout_weight="100" />
+            android:layout_weight="150" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:id="@+id/subtaskImage"
+            android:src="@drawable/ic_action_storage"
+            android:visibility="gone" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -47,19 +57,19 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:visibility="visible"
-            android:layout_weight="1" />
+            android:visibility="gone"
+            android:layout_weight="0" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:id="@+id/timeImage"
             android:src="@drawable/ic_action_alarms"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_weight="1" />
+            android:layout_weight="0" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +84,7 @@
             android:textColor="@color/grey"
             android:visibility="visible"
             android:gravity="center_vertical"
-            android:layout_weight="1"
+            android:layout_weight="0"
             android:layout_marginLeft="4dp" />
     </LinearLayout>
 
