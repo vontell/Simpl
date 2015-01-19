@@ -279,6 +279,9 @@ public class TaskActivity extends ActionBarActivity
 
     }
 
+    /**
+     * Shows the detailed view for a particular task
+     */
     public void showDetail(){
 
         LayoutInflater linf = LayoutInflater.from(this);
